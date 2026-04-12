@@ -16,6 +16,7 @@ function Login() {
 
           <h1 className="text-white text-3xl font-semibold tracking-[0.2em] mb-10">
             NEXOLOG
+            PIAUI
           </h1>
 
           <div className="w-full space-y-6">
