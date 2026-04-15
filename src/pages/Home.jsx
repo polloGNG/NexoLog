@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom';
 function Home() {
   const navigate = useNavigate();
 
+  // Itens do menu baseados no planejamento do InovAprendiz
   const menuItems = [
     {
       title: "Educação de Trânsito",
-      desc: "Aprenda sobre placas, infrações e boas práticas nas pistas.",
+      desc: "Cards educativos sobre placas e boas práticas nas pistas.",
       icon: "📚",
-      path: "/educacao",
+      path: "/educacao", // Rota para a nova Página de Educação
       color: "border-blue-500/20"
     },
     {
@@ -21,7 +22,7 @@ function Home() {
     },
     {
       title: "Painel Administrativo",
-      desc: "Acesso restrito para a Secretaria de Trânsito monitorar registros.",
+      desc: "Acesso restrito para monitoramento de registros.",
       icon: "🏛️",
       path: "/admin",
       color: "border-purple-500/20"
@@ -37,55 +38,59 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-[#121212] text-white font-sans p-6">
-      {/* Header */}
+      {/* Header com Identidade NexoLog */}
       <header className="max-w-6xl mx-auto flex justify-between items-center mb-12 py-4">
         <h1 className="text-2xl font-black tracking-tighter text-[#ffb800]">
           NEXO<span className="text-white">LOG</span> <span className="text-xs font-light text-gray-500 ml-2">Piauí</span>
         </h1>
         <div className="flex items-center gap-4">
           <div className="text-right hidden md:block">
-            <p className="text-xs font-bold uppercase">Arthur César</p>
-            <p className="text-[10px] text-gray-500">Cidadão</p>
+            <p className="text-xs font-bold uppercase tracking-widest">Arthur César</p>
+            <p className="text-[10px] text-gray-500 font-medium">Cidadão</p>
           </div>
-          <div className="w-10 h-10 rounded-full bg-[#ffb800] flex items-center justify-center text-black font-bold">
+          {/* Avatar AC conforme seu layout atual */}
+          <div className="w-10 h-10 rounded-full bg-[#ffb800] flex items-center justify-center text-black font-black text-xs shadow-[0_0_15px_rgba(255,184,0,0.3)]">
             AC
           </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto">
-        <div className="mb-10">
-          <h2 className="text-4xl font-bold mb-2">Olá, o que deseja fazer hoje?</h2>
-          <p className="text-gray-400">Sistema Integrado de Trânsito Consciente</p>
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold mb-2">Olá, Arthur César</h2>
+          <p className="text-gray-400 font-medium italic">Trânsito Consciente (NexoLog Piauí)</p>
         </div>
 
-        {/* Grid de Funções */}
+        {/* Grid de Funções Principal */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {menuItems.map((item, index) => (
             <div 
               key={index}
               onClick={() => navigate(item.path)}
-              className={`bg-[#1c1c1c] p-8 rounded-[32px] border ${item.color} hover:border-[#ffb800]/50 transition-all cursor-pointer group hover:-translate-y-2`}
+              className={`bg-[#1c1c1c] p-8 rounded-[32px] border ${item.color} hover:border-[#ffb800]/50 transition-all cursor-pointer group hover:-translate-y-2 shadow-xl`}
             >
               <div className="text-4xl mb-6 group-hover:scale-110 transition-transform">{item.icon}</div>
               <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-6">
+              <p className="text-gray-500 text-sm leading-relaxed mb-8">
                 {item.desc}
               </p>
-              <span className="text-[#ffb800] text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+              <span className="text-[#ffb800] text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
                 Acessar <span className="text-lg">→</span>
               </span>
             </div>
           ))}
         </div>
 
-        {/* Banner de Estatística Rápida (Exemplo de InovAprendiz) */}
-        <div className="mt-12 bg-gradient-to-r from-[#1c1c1c] to-transparent p-8 rounded-[32px] border border-white/5 flex flex-col md:flex-row justify-between items-center">
-          <div>
-            <p className="text-[#ffb800] font-bold text-xs uppercase tracking-[0.2em] mb-2">Status do Município</p>
-            <h4 className="text-2xl font-bold">85% das vias sinalizadas</h4>
+        {/* Banner de Estatística Rápida - Link para Relatório Completo */}
+        <div className="mt-12 bg-[#1c1c1c] p-8 rounded-[32px] border border-white/5 flex flex-col md:flex-row justify-between items-center group">
+          <div className="text-center md:text-left">
+            <p className="text-[#ffb800] font-bold text-[10px] uppercase tracking-[0.3em] mb-2">Status do Município</p>
+            <h4 className="text-2xl font-bold tracking-tight">85% das vias sinalizadas</h4>
           </div>
-          <button className="mt-4 md:mt-0 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-xl text-xs font-bold transition-all">
+          <button 
+            onClick={() => navigate('/relatorio')}
+            className="mt-6 md:mt-0 bg-white/5 hover:bg-[#ffb800] hover:text-black px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg active:scale-95"
+          >
             VER RELATÓRIO COMPLETO
           </button>
         </div>
