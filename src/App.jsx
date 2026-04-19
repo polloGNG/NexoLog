@@ -4,7 +4,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Report from './pages/Report';
-import Education from './pages/Education'; // Importe a nova página
+import Education from './pages/Education';
+import ProblemRegistration from './pages/ProblemRegistration'; // Importe aqui
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/relatorio" element={<Report />} />
         <Route path="/educacao" element={<Education />} />
+        <Route path="/registrar-problema" element={<ProblemRegistration />} /> {/* Rota adicionada */}
       </Routes>
     </Router>
   );

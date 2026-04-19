@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 function Register() {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(null);
+  // Estado para controlar se o cadastro foi concluído
+  const [isRegistered, setIsRegistered] = useState(false);
 
-  // Função para lidar com a seleção da imagem
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -13,6 +14,38 @@ function Register() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aqui você simula o sucesso do cadastro
+    setIsRegistered(true);
+  };
+
+  // Tela de Sucesso
+  if (isRegistered) {
+    return (
+      <div className="min-h-screen bg-[#121212] flex items-center justify-center p-6 font-sans text-white">
+        <div className="bg-[#1c1c1c] w-full max-w-[500px] rounded-[40px] p-12 shadow-2xl border border-[#ffb800]/20 text-center space-y-8 animate-in fade-in zoom-in duration-300">
+          <div className="w-24 h-24 bg-[#ffb800]/10 rounded-full flex items-center justify-center mx-auto border-2 border-[#ffb800]">
+            <span className="text-5xl text-[#ffb800]">✓</span>
+          </div>
+          
+          <div className="space-y-2">
+            <h2 className="text-3xl font-black uppercase tracking-tighter">Conta Criada!</h2>
+            <p className="text-gray-400 text-sm">Seu perfil operacional foi configurado com sucesso no sistema NexoLog.</p>
+          </div>
+
+          <button 
+            onClick={() => navigate('/')}
+            className="w-full bg-[#ffb800] text-black font-black py-5 rounded-2xl hover:bg-[#ffcc33] transition-all shadow-[0_10px_20px_rgba(255,184,0,0.1)] active:scale-95"
+          >
+            ACESSAR PAINEL →
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Formulário Original
   return (
     <div className="min-h-screen bg-[#121212] flex items-center justify-center p-6 font-sans text-white">
       <div className="w-full max-w-[1100px] flex flex-col md:flex-row items-center gap-12">
@@ -44,10 +77,9 @@ function Register() {
         {/* Lado Direito */}
         <div className="bg-[#1c1c1c] w-full max-w-[550px] rounded-[40px] p-10 shadow-2xl border border-white/5">
           
-          {/* Componente de Upload de Avatar */}
           <div className="flex items-center gap-4 mb-8">
             <label htmlFor="avatar-upload" className="cursor-pointer">
-              <div className="w-20 h-20 rounded-2xl bg-[#242424] border-2 border-dashed border-gray-600 flex items-center justify-center overflow-hidden hover:border-yellow-500 transition-colors">
+              <div className="w-20 h-20 rounded-2xl bg-[#242424] border-2 border-dashed border-gray-600 flex items-center justify-center overflow-hidden hover:border-[#ffb800] transition-colors">
                 {avatar ? (
                   <img src={avatar} alt="Avatar Preview" className="w-full h-full object-cover" />
                 ) : (
@@ -68,26 +100,26 @@ function Register() {
             </div>
           </div>
 
-          <form className="grid grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             <div className="col-span-1 space-y-1">
               <label className="text-gray-500 text-[9px] font-bold uppercase">Nome Completo</label>
-              <input className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-yellow-600" placeholder="Seu nome" />
+              <input required className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-[#ffb800]" placeholder="Seu nome" />
             </div>
             <div className="col-span-1 space-y-1">
               <label className="text-gray-500 text-[9px] font-bold uppercase">Email</label>
-              <input className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-yellow-600" placeholder="seu@email.com" />
+              <input required type="email" className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-[#ffb800]" placeholder="seu@email.com" />
             </div>
             <div className="col-span-2 space-y-1">
               <label className="text-gray-500 text-[9px] font-bold uppercase">Senha</label>
-              <input type="password" className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-yellow-600" placeholder="••••••••" />
+              <input required type="password" className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-[#ffb800]" placeholder="••••••••" />
             </div>
             <div className="col-span-2 space-y-1">
               <label className="text-gray-500 text-[9px] font-bold uppercase">Descrição</label>
-              <textarea className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-yellow-600 h-24 resize-none" placeholder="Experiência profissional..."></textarea>
+              <textarea className="w-full bg-[#242424] border border-gray-800 rounded-xl py-4 px-4 text-white outline-none focus:border-[#ffb800] h-24 resize-none" placeholder="Conte um pouco sobre você..."></textarea>
             </div>
             
-            <button type="submit" className="col-span-2 bg-[#ffb800] text-black font-black py-4 rounded-xl mt-4 hover:bg-[#ffcc33] transition-all">
-              CADASTRAR →
+            <button type="submit" className="col-span-2 bg-[#ffb800] text-black font-black py-4 rounded-xl mt-4 hover:bg-[#ffcc33] transition-all transform active:scale-95">
+              FINALIZAR REGISTRO →
             </button>
           </form>
 
